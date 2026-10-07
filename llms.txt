@@ -1,0 +1,66 @@
+# Banco digital — Bootcamp QI Tech 2026
+
+> API de banco digital (cliente, conta, depósito, transferência com tarifa, extrato paginado) em Python 3.11 + FastAPI + PostgreSQL 16, empacotada com Docker Compose (api, db, mock do birô). Testes black box por HTTP com pytest e MockServer. Valores monetários são inteiros em centavos; identificadores públicos são UUID (`<entidade>_key`); erros têm corpo `{title, description, translation, code}` com código `QIT…`.
+
+Documentação em pt-BR; código, rotas e campos em inglês. Cada documento tem front-matter (`title`, `summary`, `related`, `sources`) e começa com "Responde a". A RFC é derivada dos documentos; em divergência, vale o documento de origem.
+
+## Comece aqui
+
+- [Índice da documentação](docs/README.md): mapa completo, com a pergunta que cada documento responde
+- [README](README.md): como rodar (`docker compose up -d` + `pytest -v`)
+- [Glossário](docs/glossario.md): termos (key, ACID, idempotência, IDOR, request_control_key)
+
+## Contexto
+
+- [Problema](docs/01-contexto/problema.md): operações, garantias sobre o dinheiro, fora do escopo
+- [Requisitos](docs/01-contexto/requisitos.md): restrições R1–R8 do enunciado, regras RN01–RN22, matriz regra → teste
+
+## Arquitetura
+
+- [Visão geral](docs/02-arquitetura/visao-geral.md): ecossistema (api, db, mock), API stateless, caminho da requisição
+- [Camadas](docs/02-arquitetura/camadas.md): o que cada pasta de src/ pode e não pode fazer
+- [Decisões (ADRs)](docs/02-arquitetura/decisoes/README.md): índice
+- [ADR 0001](docs/02-arquitetura/decisoes/0001-monolito-com-mock-externo.md): monólito + MockServer como birô
+- [ADR 0002](docs/02-arquitetura/decisoes/0002-saldo-em-coluna-com-lock.md): saldo em coluna, FOR UPDATE em ordem de id, CHECK >= 0
+- [ADR 0003](docs/02-arquitetura/decisoes/0003-transacao-tabela-unica-com-tipo.md): tabela única transaction; a tarifa é um lançamento FEE
+- [ADR 0004](docs/02-arquitetura/decisoes/0004-dinheiro-em-centavos.md): BIGINT em centavos
+- [ADR 0005](docs/02-arquitetura/decisoes/0005-uuid-key-publica.md): id interno, key UUID pública
+- [ADR 0006](docs/02-arquitetura/decisoes/0006-idempotencia-por-chave.md): request_control_key + UNIQUE
+- [ADR 0007](docs/02-arquitetura/decisoes/0007-convencao-de-rotas.md): item no singular, lista no plural, sem versão
+
+## API
+
+- [Convenções](docs/03-api/convencoes.md): REST, status HTTP, formato de erro, paginação, headers
+- [Rotas](docs/03-api/rotas.md): tabela completa com entradas, saídas e idempotência
+- [Erros](docs/03-api/erros.md): catálogo QIT e próximo código livre
+
+## Dados
+
+- [Modelo](docs/04-dados/modelo.md): diagrama ER, DDL de referência, invariantes
+- [Estados](docs/04-dados/estados.md): máquina de estados da conta
+
+## Fluxos
+
+- [Criar cliente](docs/05-fluxos/criar-cliente.md): validações, birô com timeout, 502
+- [Abrir conta](docs/05-fluxos/abrir-conta.md): cliente existe, limite de contas, nasce ACTIVE
+- [Depósito](docs/05-fluxos/deposito.md)
+- [Transferência](docs/05-fluxos/transferencia.md): o principal desafio (lock, tarifa, idempotência)
+- [Extrato](docs/05-fluxos/extrato.md): paginação e reconstrução do saldo
+
+## Operação
+
+- [Rodando localmente](docs/06-operacao/rodando-localmente.md): comandos, variáveis, armadilhas
+- [Observabilidade](docs/06-operacao/observabilidade.md): logs com request id, health check, métricas, alarmes
+- [Segurança](docs/06-operacao/seguranca.md): INTERNAL-TOKEN, segredos, IDOR → 404, OWASP API
+- [Resiliência](docs/06-operacao/resiliencia.md): timeout, 502, retry, escala
+
+## Testes e processo
+
+- [Estratégia de testes](docs/07-testes/estrategia.md): black box, TDD, MockServer, helpers
+- [Contribuindo](docs/contribuindo.md): Clean Code, nomes, Conventional Commits, checklist de PR
+- [RFC](docs/rfc/RFC.md): documento de entrega
+- [Como gerar a RFC](docs/rfc/README.md): exportar para PDF, checklist
+
+## Optional
+
+- [README original do base-service](docs/referencia/base-service-readme.md): exemplo sample_entity e troubleshooting detalhado
