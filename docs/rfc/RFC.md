@@ -11,7 +11,7 @@ sources: [bootcamp-rfc-modelo.md (Aula 2)]
 |---|---|
 | **Time** | Pedro H. S. Prestes · Laura Pazini Medeiros |
 | **Data** | 11/10/2026 |
-| **Versão** | 5 |
+| **Versão** | 6 |
 
 ## Contextualização
 
@@ -117,19 +117,32 @@ Como na base, a sessão vive uma requisição e o `commit` é a última linha do
 3. Chama o birô (timeout 5 s), sem nenhuma trava aberta.
 4. Com `REGULAR`, grava o cliente, faz `commit` e responde `201`.
 
-**Cadastro de cliente: falha do birô.** Timeout, conexão caída ou 5xx: `502 QIT002006`, nada gravado, repetir é seguro. Dois cadastros simultâneos do mesmo CPF: o segundo bate no `UNIQUE` e recebe `409 QIT002002`.
+**Cadastro de cliente: falha do birô.** CPF fora de `REGULAR`, ou desconhecido (`404` do birô): `422 QIT002005`. Timeout, conexão caída, 5xx ou corpo sem `situation`: `502 QIT002006`, nada gravado, repetir é seguro. Dois cadastros simultâneos do mesmo CPF: o segundo bate no `UNIQUE` e recebe `409 QIT002002`.
 
 **Abertura de conta.** Trava o cliente (`FOR UPDATE`), conta as contas não encerradas e, abaixo de 3, cria a conta `ACTIVE` e o evento `NULL → ACTIVE`. Falha: no limite, `409 QIT002008`; duas aberturas simultâneas são serializadas pela trava, e a segunda recebe 409.
 
-**Mudança de estado.** Trava a conta, confere a transição (`ACTIVE ⇄ BLOCKED`, `ACTIVE → CLOSED`, `CLOSED` é final) e grava o estado e o evento. Falha: transição inválida, `409 QIT002010`; encerrar com saldo, `409 QIT002011`.
+**Mudança de estado.** Trava a conta, confere a transição (`ACTIVE ⇄ BLOCKED`, `ACTIVE → CLOSED`, `CLOSED` é final) e grava o estado novo e uma linha em `account_status_event` no mesmo `commit`. Só `ACTIVE` movimenta dinheiro. Falha: transição inválida, inclusive pedir o estado atual, `409 QIT002010`; encerrar com saldo, `409 QIT002011`.
 
 **Transferência: caminho feliz**
 
-1. Procura a `request_control_key`. Não existe.
-2. Resolve origem e destino pela key; destino igual à origem, `422 QIT002013`.
-3. Trava as duas contas com `FOR UPDATE`, do menor para o maior `id`. A ordem fixa evita deadlock entre A→B e B→A.
-4. Revalida depois da trava: as duas `ACTIVE` e saldo da origem ≥ `amount` + 200.
-5. Grava `TRANSFER_OUT` e `FEE` na origem e `TRANSFER_IN` no destino, atualiza os dois saldos, um `commit`, `201`.
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as Quem chama
+    participant API as api
+    participant DB as db
+    C->>API: POST /account/{origem}/transaction (TRANSFER, request_control_key)
+    API->>DB: busca request_control_key
+    DB-->>API: nenhuma
+    API->>DB: busca origem e destino por key (sem trava)
+    API->>DB: SELECT … FOR UPDATE nas duas contas, ORDER BY id
+    Note over API: revalida ACTIVE e saldo >= amount + fee
+    API->>DB: INSERT TRANSFER_OUT, TRANSFER_IN e FEE
+    API->>DB: UPDATE dos dois saldos e COMMIT
+    API-->>C: 201 (transaction_key, fee, balance)
+```
+
+Destino igual à origem é recusado antes da trava (`422 QIT002013`). A trava segue sempre do menor para o maior `id`, então A→B e B→A simultâneas não entram em deadlock, e a validação vem depois dela porque o saldo lido antes pode ter mudado. A tarifa é `TRANSFER_FEE_CENTS` (padrão 200).
 
 **Transferência: duas simultâneas da mesma origem.** Origem com 10000; T1 e T2 pedem 8000. T1 trava, debita 8200 e faz `commit`. T2 esperava no `FOR UPDATE`, relê 1800 e recebe `422 QIT002012`. Nada de T2 é gravado.
 
