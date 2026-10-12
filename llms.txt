@@ -1,6 +1,6 @@
 # Banco digital: Bootcamp QI Tech 2026
 
-> API de banco digital (cliente, conta, depósito, transferência com tarifa, extrato paginado) em Python 3.11 + FastAPI + PostgreSQL 16, empacotada com Docker Compose (api, db, mock do birô). Testes black box por HTTP com pytest e MockServer. Valores monetários são inteiros em centavos; identificadores públicos são UUID (`<entidade>_key`); erros têm corpo `{title, description, translation, code}` com código `QIT…`.
+> API de banco digital (cliente, conta, depósito, transferência com tarifa, extrato paginado) em Python 3.11 + FastAPI + PostgreSQL 16, empacotada com Docker Compose (api, db, mock do birô, pgadmin). Testes black box por HTTP com pytest e MockServer. Valores monetários são inteiros em centavos; identificadores públicos são UUID (`<entidade>_key`); erros têm corpo `{title, description, translation, code}` com código `QIT…`.
 
 Documentação em pt-BR; código, rotas e campos em inglês. Cada documento tem front-matter (`title`, `summary`, `related`, `sources`) e começa com "Responde a". A RFC é derivada dos documentos; em divergência, vale o documento de origem.
 
@@ -18,7 +18,7 @@ Documentação em pt-BR; código, rotas e campos em inglês. Cada documento tem 
 
 ## Arquitetura
 
-- [Visão geral](docs/02-arquitetura/visao-geral.md): ecossistema (api, db, mock), API stateless, caminho da requisição
+- [Visão geral](docs/02-arquitetura/visao-geral.md): ecossistema (api, db, mock, pgadmin), o que veio da base e o que é novo, API stateless, caminho da requisição
 - [Camadas](docs/02-arquitetura/camadas.md): o que cada pasta de src/ pode e não pode fazer
 - [Decisões (ADRs)](docs/02-arquitetura/decisoes/README.md): índice
 - [ADR 0001](docs/02-arquitetura/decisoes/0001-monolito-com-mock-externo.md): monólito + MockServer como birô
@@ -29,6 +29,7 @@ Documentação em pt-BR; código, rotas e campos em inglês. Cada documento tem 
 - [ADR 0006](docs/02-arquitetura/decisoes/0006-idempotencia-por-chave.md): request_control_key + UNIQUE
 - [ADR 0007](docs/02-arquitetura/decisoes/0007-convencao-de-rotas.md): item no singular, lista no plural, sem versão
 - [ADR 0008](docs/02-arquitetura/decisoes/0008-repositorio-ai-friendly.md): AGENTS.md como fonte única para agentes; skills em .agents/
+- [ADR 0009](docs/02-arquitetura/decisoes/0009-contrato-em-json-schema.md): contrato de entrada em JSON Schema fechado, não Pydantic
 
 ## API
 

@@ -4,7 +4,7 @@ Instruções para agentes de código, no formato [agents.md](https://agents.md).
 
 ## Projeto
 
-API de banco digital do Bootcamp QI Tech 2026: cliente, conta, depósito, transferência com tarifa e extrato paginado. Python 3.11, FastAPI, SQLAlchemy 2, PostgreSQL 16, jsonschema e Docker Compose (`api`, `db`, `mock` = MockServer no papel do birô de CPF). Nasceu do `bootcamp-base-api`: o exemplo `sample_entity` foi trocado por `customer`, `account` e `transaction`, cobertos por 78 testes black box.
+API de banco digital do Bootcamp QI Tech 2026: cliente, conta, depósito, transferência com tarifa e extrato paginado. Python 3.11, FastAPI, SQLAlchemy 2, PostgreSQL 16, jsonschema e Docker Compose (`api`, `db`, `mock` = MockServer no papel do birô de CPF, `pgadmin` só para inspecionar o banco). Nasceu do `bootcamp-base-api`: o exemplo `sample_entity` foi trocado por `customer`, `account` e `transaction`, cobertos por 78 testes black box.
 
 Entrega da fase 1: 12/10, até 12h, repositório público no GitHub + PDF da RFC. A banca avalia o repositório como estiver nesse momento.
 
@@ -14,7 +14,7 @@ A documentação é a fonte da verdade. Comece por [docs/README.md](docs/README.
 
 ```bash
 make                # lista os alvos
-make all            # sobe api/db/mock (espera healthy), cria .venv 3.11 e roda pytest -v
+make all            # sobe api/db/mock/pgadmin (espera healthy), cria .venv 3.11 e roda pytest -v
 make up             # só sobe
 make test           # só testa (precisa do make up)
 make lint           # flake8 src tests; precisa sair limpo

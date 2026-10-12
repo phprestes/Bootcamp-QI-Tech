@@ -29,7 +29,7 @@ make all                             # up --wait + .venv 3.11 + pytest -v
 Sem `make`:
 
 ```bash
-docker compose up -d --wait          # api, db e mock; espera api ficar (healthy)
+docker compose up -d --wait          # api, db, mock e pgadmin; espera api ficar (healthy)
 python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 pytest -v
@@ -59,12 +59,17 @@ O `make install` só recria o `.venv` quando `requirements*.txt` muda. Usa `pyth
 
 O código em `src/` é montado no container e roda com `--reload`: salvou, recarregou.
 
+## Olhar o banco (pgAdmin)
+
+O `make up` também sobe o pgAdmin em `http://localhost:5050`. Entre com `admin@bootcamp.com` / `bootcamp` e registre o servidor: host `db`, porta `5432`, banco, usuário e senha `bootcamp`. Serve só para inspecionar; prepare cenário de teste pela API (R1).
+
 ## Variáveis de ambiente
 
 | Variável | Padrão | Uso |
 |---|---|---|
 | `INTERNAL_TOKEN` | `default_token` | Token exigido nas rotas; os testes leem o mesmo valor |
-| `API_PORT` / `DB_PORT` / `MOCK_PORT` | 3000 / 5432 / 1080 | Trocar se a porta estiver ocupada |
+| `API_PORT` / `DB_PORT` / `MOCK_PORT` / `PGADMIN_PORT` | 3000 / 5432 / 1080 / 5050 | Trocar se a porta estiver ocupada |
+| `PGADMIN_DEFAULT_EMAIL` / `PGADMIN_DEFAULT_PASSWORD` | `admin@bootcamp.com` / `bootcamp` | Login do pgAdmin |
 | `BUREAU_API_URL` | `http://mock:1080/bureau` (no compose) | Endereço do birô |
 | `BUREAU_API_TIMEOUT` | 5 | Segundos de espera pelo birô |
 | `TRANSFER_FEE_CENTS` | 200 | Tarifa por transferência, em centavos |

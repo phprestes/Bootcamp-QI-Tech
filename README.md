@@ -5,7 +5,7 @@ API de um banco digital com cadastro de cliente, conta vinculada, depósito, tra
 ## Rodar e testar
 
 ```bash
-make all      # sobe api, db e mock, espera ficarem healthy, cria o .venv (Python 3.11) e roda o pytest
+make all      # sobe api, db, mock e pgadmin, espera ficarem healthy, cria o .venv (Python 3.11) e roda o pytest
 ```
 
 `make` sem argumento lista todos os alvos (`up`, `test`, `lint`, `reset`, `rebuild`, `logs`, `clean`…). O `make install` usa `python3.11` se existir e cai para `uv venv -p 3.11` caso contrário.
@@ -13,13 +13,13 @@ make all      # sobe api, db e mock, espera ficarem healthy, cria o .venv (Pytho
 Sem `make`, os mesmos passos à mão:
 
 ```bash
-docker compose up -d --wait                # api, db e mock (espera a api ficar "healthy")
+docker compose up -d --wait                # api, db, mock e pgadmin (espera a api ficar "healthy")
 python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 pytest -v
 ```
 
-Não é preciso criar `.env`: todo valor tem um padrão no compose. A API responde em `http://localhost:3000`, e toda rota (menos `/` e `/health_check`) exige o header `INTERNAL-TOKEN: default_token`.
+Não é preciso criar `.env`: todo valor tem um padrão no compose. A API responde em `http://localhost:3000`, e toda rota (menos `/` e `/health_check`) exige o header `INTERNAL-TOKEN: default_token`. O pgAdmin, para olhar o banco, fica em `http://localhost:5050`.
 
 Mudou `database/database.sql`? Rode `make reset`. Mudou `requirements.txt`? Rode `make rebuild`. Há mais detalhes em [rodando localmente](docs/06-operacao/rodando-localmente.md).
 

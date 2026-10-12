@@ -27,7 +27,7 @@ sources: [Bootcamp QI Tech 2026, Aulas 1 a 4]
 | [problema.md](01-contexto/problema.md) | O que o sistema faz, para quem, e o que está fora do escopo? |
 | [requisitos.md](01-contexto/requisitos.md) | Quais restrições (R1–R8) e regras de negócio valem, e qual teste prova cada uma? |
 | **02 · Arquitetura** | |
-| [visao-geral.md](02-arquitetura/visao-geral.md) | Quais serviços sobem, quem chama quem? |
+| [visao-geral.md](02-arquitetura/visao-geral.md) | Quais serviços sobem, quem chama quem, e o que é novo em relação à base? |
 | [camadas.md](02-arquitetura/camadas.md) | Em qual pasta mora cada coisa e o que ela não pode fazer? |
 | [decisoes/](02-arquitetura/decisoes/README.md) | Por que cada escolha foi feita, e o que foi descartado? |
 | **03 · API** | |
@@ -53,7 +53,7 @@ sources: [Bootcamp QI Tech 2026, Aulas 1 a 4]
 | **Processo** | |
 | [contribuindo.md](contribuindo.md) | Clean Code, commits, branches, lint, checklist de PR |
 | [trabalhando-com-ia.md](trabalhando-com-ia.md) | Por que o repositório é AI-friendly e como usar agentes (`AGENTS.md`, `.agents/`, `llms.txt`)? |
-| [rfc/RFC.md](rfc/RFC.md) | O documento de entrega (vira PDF). Autossuficiente: corpo no modelo da aula e anexos com todo o detalhe |
+| [rfc/RFC.md](rfc/RFC.md) | O documento de entrega, no modelo da Aula 2 e em até 4 páginas; o PDF entregue é o [RFC.pdf](rfc/RFC.pdf) |
 | [rfc/README.md](rfc/README.md) | Como exportar a RFC e o checklist do modelo |
 | [referencia/base-service-readme.md](referencia/base-service-readme.md) | README original do serviço-base (exemplo `sample_entity`) |
 
