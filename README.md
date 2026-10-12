@@ -5,15 +5,23 @@ API de um banco digital com cadastro de cliente, conta vinculada, depósito, tra
 ## Rodar e testar
 
 ```bash
-docker compose up -d                       # api, db e mock (aguarde a api ficar "healthy")
-python3 -m venv .venv && source .venv/bin/activate
+make all      # sobe api, db e mock, espera ficarem healthy, cria o .venv (Python 3.11) e roda o pytest
+```
+
+`make` sem argumento lista todos os alvos (`up`, `test`, `lint`, `reset`, `rebuild`, `logs`, `clean`…). O `make install` usa `python3.11` se existir e cai para `uv venv -p 3.11` caso contrário.
+
+Sem `make`, os mesmos passos à mão:
+
+```bash
+docker compose up -d --wait                # api, db e mock (espera a api ficar "healthy")
+python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 pytest -v
 ```
 
 Não é preciso criar `.env`: todo valor tem um padrão no compose. A API responde em `http://localhost:3000`, e toda rota (menos `/` e `/health_check`) exige o header `INTERNAL-TOKEN: default_token`.
 
-Mudou `database/database.sql`? Rode `docker compose down -v`. Mudou `requirements.txt`? Rode `docker compose build --no-cache api`. Há mais detalhes em [rodando localmente](docs/06-operacao/rodando-localmente.md).
+Mudou `database/database.sql`? Rode `make reset`. Mudou `requirements.txt`? Rode `make rebuild`. Há mais detalhes em [rodando localmente](docs/06-operacao/rodando-localmente.md).
 
 ## Documentação
 

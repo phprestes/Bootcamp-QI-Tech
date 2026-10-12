@@ -18,8 +18,8 @@ São parte do enunciado do desafio e cobradas pela banca. A coluna do meio apont
 | # | Restrição | Onde o material cita | Como o projeto atende |
 |---|---|---|---|
 | R1 | Nenhum arquivo de teste importa código de dentro da aplicação | Autoestudo 3 (teste black box) | Os testes usam só HTTP. Ver [estratégia de testes](../07-testes/estrategia.md). |
-| R2 | A entrega sobe e roda com **um comando** na máquina limpa do avaliador (Linux) | Autoestudo 3; Dia 3 manhã p.33; Dia 4 tarde | `docker compose up` seguido de `pytest`. Ver [rodando localmente](../06-operacao/rodando-localmente.md). |
-| R3 | Erro não é só status: o corpo traz um **código** próprio | Autoestudo 2 ("Designing API Errors") | Corpo `{title, description, translation, code}`. Ver [erros](../03-api/erros.md). |
+| R2 | A entrega sobe e roda com um comando na máquina limpa do avaliador (Linux) | Autoestudo 3; Dia 3 manhã p.33; Dia 4 tarde | `make all` (ou `docker compose up -d --wait` e `pytest`). Ver [rodando localmente](../06-operacao/rodando-localmente.md). |
+| R3 | Erro não é só status: o corpo traz um código próprio | Autoestudo 2 ("Designing API Errors") | Corpo `{title, description, translation, code}`. Ver [erros](../03-api/erros.md). |
 | R4 | **Nada que entrou deixa de existir** (append-only; soft delete não serve) | Autoestudo 2 | `transaction` e `account_status_event` só recebem INSERT. Ver [modelo](../04-dados/modelo.md). |
 | R5 | Nenhum identificador devolvido é o número que o banco gerou | Autoestudo 2 | `<entidade>_key` UUID. Ver [ADR 0005](../02-arquitetura/decisoes/0005-uuid-key-publica.md). |
 | R6 | Dinheiro não é float | Autoestudo 2 ("FLOAT pra dinheiro") | `BIGINT` em centavos. Ver [ADR 0004](../02-arquitetura/decisoes/0004-dinheiro-em-centavos.md). |

@@ -14,7 +14,8 @@ sources: [Aula 3 manhã p.29-33, Guia Dia 3, bootcamp-base-api README]
 Pré-requisitos:
 
 - Docker com Compose v2.
-- Python 3.11, só para rodar o `pytest` na máquina. **Não use 3.12+**: o SQLAlchemy 2.0.23 fixado no projeto quebra no import (`uv venv -p 3.11` resolve se o sistema tiver outra versão).
+- `make` (opcional, atalho para os comandos abaixo).
+- Python 3.11, só para rodar o `pytest` na máquina. Não use 3.12+: o SQLAlchemy 2.0.23 fixado no projeto quebra no import (`uv venv -p 3.11` resolve se o sistema tiver outra versão).
 
 Não é preciso criar `.env`: todo valor tem um padrão `${VAR:-padrão}` no compose.
 
@@ -22,25 +23,39 @@ Não é preciso criar `.env`: todo valor tem um padrão `${VAR:-padrão}` no com
 
 ```bash
 git clone <repo> && cd <repo>
-docker compose up -d                 # api, db e mock; espere api ficar (healthy)
-python3 -m venv .venv && source .venv/bin/activate
+make all                             # up --wait + .venv 3.11 + pytest -v
+```
+
+Sem `make`:
+
+```bash
+docker compose up -d --wait          # api, db e mock; espera api ficar (healthy)
+python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 pytest -v
 ```
+
+O `make install` só recria o `.venv` quando `requirements*.txt` muda. Usa `python3.11` se existir; senão, `uv venv -p 3.11`.
 
 > **Antes de entregar:** apague a pasta, clone de novo e rode exatamente os comandos acima, em Linux. "Se para subir é preciso mais de um comando, falta alguma coisa no compose."
 
 ## Dia a dia
 
-| Quero… | Comando | Por quê |
-|---|---|---|
-| ver o estado | `docker compose ps` | mostra `healthy` e `unhealthy` |
-| ver o log da API | `docker compose logs -f api` | é o primeiro lugar onde olhar |
-| parar e manter os dados | `docker compose stop` | o volume fica |
-| **mudei `database/database.sql`** | `docker compose down -v && docker compose up -d --build` | o SQL só roda quando o banco nasce |
-| **mudei `requirements.txt`** | `docker compose build --no-cache api && docker compose up -d` | a dependência mora na imagem |
-| entrar no container | `docker compose exec api sh` | inspecionar sem instalar nada |
-| lint | `python3 -m flake8 .` | precisa sair sem nenhum apontamento |
+| Quero… | `make` | Comando equivalente | Por quê |
+|---|---|---|---|
+| ver todos os alvos | `make` | — | lista com descrição |
+| subir tudo | `make up` | `docker compose up -d --build --wait` | volta só quando tudo está `healthy` |
+| rodar os testes | `make test` | `pytest -v` | precisa do `make up` antes |
+| cobertura | `make test-cov` | `pytest --cov` | |
+| ver o estado | `make ps` | `docker compose ps` | mostra `healthy` e `unhealthy` |
+| ver o log da API | `make logs` | `docker compose logs -f api` | é o primeiro lugar onde olhar |
+| parar e manter os dados | `make stop` | `docker compose stop` | o volume fica |
+| **mudei `database/database.sql`** | `make reset` | `docker compose down -v && docker compose up -d --build --wait` | o SQL só roda quando o banco nasce |
+| **mudei `requirements.txt`** | `make rebuild` | `docker compose build --no-cache api && docker compose up -d --wait` | a dependência mora na imagem |
+| entrar no container | `make shell` | `docker compose exec api sh` | inspecionar sem instalar nada |
+| lint | `make lint` | `flake8 src tests` | precisa sair sem nenhum apontamento |
+| lint e testes | `make check` | | antes de abrir PR |
+| limpar tudo | `make clean` | `docker compose down -v && rm -rf .venv` | apaga dados do banco |
 
 O código em `src/` é montado no container e roda com `--reload`: salvou, recarregou.
 
@@ -60,10 +75,11 @@ O código em `src/` é montado no container e roda com `--reload`: salvou, recar
 
 | Sintoma | Causa | Correção |
 |---|---|---|
-| `relation "…" does not exist` | O SQL mudou, mas o volume é antigo | `docker compose down -v` |
-| `ModuleNotFoundError` dentro da API | A dependência nova não está na imagem | `build --no-cache api` |
+| `relation "…" does not exist` | O SQL mudou, mas o volume é antigo | `make reset` |
+| `ModuleNotFoundError` dentro da API | A dependência nova não está na imagem | `make rebuild` |
 | `port is already allocated` | A porta já está em uso | `API_PORT=3001` no `.env` |
 | `403` em todo teste | Token diferente entre o compose e o `.env` dos testes | Use o mesmo `INTERNAL_TOKEN` |
-| Primeiro teste falha com conexão recusada | A API ainda não está `healthy` | Espere o `docker compose ps` |
+| Primeiro teste falha com conexão recusada | A API ainda não está `healthy` | Use `make up` (espera o healthcheck) |
+| `ImportError` do SQLAlchemy no pytest | `.venv` criado com Python 3.12+ | `rm -rf .venv && make install` |
 
 Para o troubleshooting completo do serviço-base, veja o [README original](../referencia/base-service-readme.md#3-quando-dá-errado).

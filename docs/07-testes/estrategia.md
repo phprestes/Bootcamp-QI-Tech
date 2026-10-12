@@ -102,7 +102,7 @@ tests/
 ## Como rodar
 
 ```bash
-docker compose up -d && pytest -v
+make up test                                     # ou: docker compose up -d --wait && pytest -v
 pytest tests/integration/transaction -v          # só uma pasta
 pytest -k insufficient -v                        # por nome
 pytest --cov                                     # cobertura (pytest-cov)

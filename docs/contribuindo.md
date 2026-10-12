@@ -60,14 +60,14 @@ docs(rfc): describe lock ordering as main challenge
 
 ## Branches
 
-- `main` sempre verde: sobe com `docker compose up` e passa no `pytest`.
+- `main` sempre verde: sobe com `make up` e passa no `make test`.
 - Branch por feature: `feat/<recurso>-<assunto>`, `fix/<assunto>` ou `docs/<assunto>`.
 - Merge por PR com revisão de pelo menos uma pessoa do time.
 
 ## Lint
 
 ```bash
-python3 -m flake8 .
+make lint        # ou: flake8 src tests
 ```
 
 A configuração está em `.flake8` (linha de até 140 caracteres). O resultado precisa sair limpo.
@@ -76,8 +76,7 @@ A configuração está em `.flake8` (linha de até 140 caracteres). O resultado 
 
 - [ ] Existe um teste que fica vermelho sem a mudança, e cada `if` novo tem os dois caminhos testados.
 - [ ] Nenhum teste importa `src/` (R1).
-- [ ] `docker compose down -v && docker compose up -d && pytest` passa (R2).
-- [ ] `flake8` limpo.
+- [ ] `make reset check` passa: banco do zero, lint limpo e testes verdes (R2).
 - [ ] Erros novos estão no [catálogo](03-api/erros.md), com o próximo código livre atualizado.
 - [ ] Rotas novas estão em [rotas.md](03-api/rotas.md). Decisões novas viraram ADR.
 - [ ] As quatro perguntas foram respondidas: quem pode pedir, quanto tempo espero, o que acontece se pedirem duas vezes, como vou saber que falhou?

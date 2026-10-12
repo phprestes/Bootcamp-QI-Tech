@@ -7,7 +7,7 @@ Documentação em pt-BR; código, rotas e campos em inglês. Cada documento tem 
 ## Comece aqui
 
 - [Índice da documentação](docs/README.md): mapa completo, com a pergunta que cada documento responde
-- [README](README.md): como rodar (`docker compose up -d` + `pytest -v`)
+- [README](README.md): como rodar (`make all`, ou `docker compose up -d --wait` + `pytest -v`)
 - [Glossário](docs/glossario.md): termos (key, ACID, idempotência, IDOR, request_control_key)
 
 ## Contexto
