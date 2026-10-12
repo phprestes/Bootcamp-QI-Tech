@@ -53,7 +53,7 @@ sources: [Bootcamp QI Tech 2026, Aulas 1 a 4]
 | **Processo** | |
 | [contribuindo.md](contribuindo.md) | Clean Code, commits, branches, lint, checklist de PR |
 | [trabalhando-com-ia.md](trabalhando-com-ia.md) | Por que o repositório é AI-friendly e como usar agentes (`AGENTS.md`, `.agents/`, `llms.txt`)? |
-| [rfc/RFC.md](rfc/RFC.md) | O documento de entrega (vira PDF) |
+| [rfc/RFC.md](rfc/RFC.md) | O documento de entrega (vira PDF). Autossuficiente: corpo no modelo da aula e anexos com todo o detalhe |
 | [rfc/README.md](rfc/README.md) | Como exportar a RFC e o checklist do modelo |
 | [referencia/base-service-readme.md](referencia/base-service-readme.md) | README original do serviço-base (exemplo `sample_entity`) |
 
