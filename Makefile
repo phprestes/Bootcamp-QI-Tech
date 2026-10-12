@@ -13,7 +13,7 @@ help: ## Lista os comandos
 
 all: up test ## Sobe tudo e roda os testes (do clone ao verde)
 
-up: ## Sobe api, db e mock e espera ficarem healthy
+up: ## Sobe api, db, mock e pgadmin e espera ficarem healthy
 	$(COMPOSE) up -d --build --wait
 
 down: ## Para e remove os containers (mantém o volume)
