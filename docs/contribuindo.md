@@ -72,6 +72,10 @@ make lint        # ou: flake8 src tests
 
 A configuração está em `.flake8` (linha de até 140 caracteres). O resultado precisa sair limpo.
 
+## Usando agentes de IA
+
+Pode usar e é incentivado. O agente segue o [`AGENTS.md`](../AGENTS.md) e as skills em [`.agents/skills/`](../.agents/README.md), e o código dele passa pelo mesmo checklist abaixo. Veja [trabalhando com IA](trabalhando-com-ia.md).
+
 ## Checklist de PR
 
 - [ ] Existe um teste que fica vermelho sem a mudança, e cada `if` novo tem os dois caminhos testados.
@@ -79,5 +83,6 @@ A configuração está em `.flake8` (linha de até 140 caracteres). O resultado 
 - [ ] `make reset check` passa: banco do zero, lint limpo e testes verdes (R2).
 - [ ] Erros novos estão no [catálogo](03-api/erros.md), com o próximo código livre atualizado.
 - [ ] Rotas novas estão em [rotas.md](03-api/rotas.md). Decisões novas viraram ADR.
+- [ ] Regra, comando ou camada mudou? O [`AGENTS.md`](../AGENTS.md) acompanha.
 - [ ] As quatro perguntas foram respondidas: quem pode pedir, quanto tempo espero, o que acontece se pedirem duas vezes, como vou saber que falhou?
 - [ ] Nenhum segredo no código. O `.env` não foi versionado.

@@ -7,6 +7,7 @@ Documentação em pt-BR; código, rotas e campos em inglês. Cada documento tem 
 ## Comece aqui
 
 - [Índice da documentação](docs/README.md): mapa completo, com a pergunta que cada documento responde
+- [AGENTS.md](AGENTS.md): instruções para agentes de código (comandos, regras R1–R8, camadas, limites)
 - [README](README.md): como rodar (`make all`, ou `docker compose up -d --wait` + `pytest -v`)
 - [Glossário](docs/glossario.md): termos (key, ACID, idempotência, IDOR, request_control_key)
 
@@ -27,6 +28,7 @@ Documentação em pt-BR; código, rotas e campos em inglês. Cada documento tem 
 - [ADR 0005](docs/02-arquitetura/decisoes/0005-uuid-key-publica.md): id interno, key UUID pública
 - [ADR 0006](docs/02-arquitetura/decisoes/0006-idempotencia-por-chave.md): request_control_key + UNIQUE
 - [ADR 0007](docs/02-arquitetura/decisoes/0007-convencao-de-rotas.md): item no singular, lista no plural, sem versão
+- [ADR 0008](docs/02-arquitetura/decisoes/0008-repositorio-ai-friendly.md): AGENTS.md como fonte única para agentes; skills em .agents/
 
 ## API
 
@@ -58,6 +60,8 @@ Documentação em pt-BR; código, rotas e campos em inglês. Cada documento tem 
 
 - [Estratégia de testes](docs/07-testes/estrategia.md): black box, TDD, MockServer, helpers
 - [Contribuindo](docs/contribuindo.md): Clean Code, nomes, Conventional Commits, checklist de PR
+- [Trabalhando com IA](docs/trabalhando-com-ia.md): por que o repositório é AI-friendly; AGENTS.md, .agents/skills, pontes por ferramenta
+- [Skills](.agents/README.md): receitas para agentes (nova rota, novo erro, nova decisão, revisar mudança)
 - [RFC](docs/rfc/RFC.md): documento de entrega
 - [Como gerar a RFC](docs/rfc/README.md): exportar para PDF, checklist
 

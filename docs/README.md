@@ -7,7 +7,9 @@ sources: [Bootcamp QI Tech 2026, Aulas 1 a 4]
 
 # Documentação — Banco digital (Bootcamp QI Tech 2026)
 
-> **Como navegar:** cada documento trata de um assunto só, abre com front-matter (`title`, `summary`, `related`, `sources`) e com a linha **Responde a**. Os links são relativos e os diagramas são Mermaid (texto). A [RFC](rfc/RFC.md) é **derivada** destes documentos: quando eles divergirem, quem manda é o documento de origem.
+> **Repositório AI-friendly:** agentes de código começam pelo [`AGENTS.md`](../AGENTS.md); o porquê está em [trabalhando com IA](trabalhando-com-ia.md).
+>
+> **Como navegar:** cada documento trata de um assunto só, abre com front-matter (`title`, `summary`, `related`, `sources`) e com a linha *Responde a*. Os links são relativos e os diagramas são Mermaid (texto). A [RFC](rfc/RFC.md) é derivada destes documentos: quando eles divergirem, quem manda é o documento de origem.
 
 ## Leitura mínima (10 minutos)
 
@@ -50,6 +52,7 @@ sources: [Bootcamp QI Tech 2026, Aulas 1 a 4]
 | [estrategia.md](07-testes/estrategia.md) | Como testamos (black box, TDD, Mockserver) e como rodar |
 | **Processo** | |
 | [contribuindo.md](contribuindo.md) | Clean Code, commits, branches, lint, checklist de PR |
+| [trabalhando-com-ia.md](trabalhando-com-ia.md) | Por que o repositório é AI-friendly e como usar agentes (`AGENTS.md`, `.agents/`, `llms.txt`)? |
 | [rfc/RFC.md](rfc/RFC.md) | O documento de entrega (vira PDF) |
 | [rfc/README.md](rfc/README.md) | Como exportar a RFC e o checklist do modelo |
 | [referencia/base-service-readme.md](referencia/base-service-readme.md) | README original do serviço-base (exemplo `sample_entity`) |
