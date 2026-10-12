@@ -11,7 +11,7 @@ sources: [Aula 2 tarde p.32-45, Aula 3 manhã p.8, database.sql do base-service 
 >
 > **Responde a:** quais tabelas existem? o que garante unicidade? onde mora o saldo? o que é append-only?
 
-A ordem de modelagem da aula é **entidade → estado → relação**. O schema mora em `database/database.sql` e só roda quando o banco nasce. Para mudá-lo é preciso `docker compose down -v`; ver [rodando localmente](../06-operacao/rodando-localmente.md).
+O schema mora em `database/database.sql` e só roda quando o banco nasce: depois de mudá-lo, `make reset` ([rodando localmente](../06-operacao/rodando-localmente.md)).
 
 ## Diagrama
 
@@ -167,13 +167,7 @@ CREATE INDEX transaction_statement_idx ON transaction(account_id, created_at DES
 |---|---|
 | CPF único | `UNIQUE(document_number)` mais a checagem prévia no controller, para devolver 409 limpo |
 | Saldo nunca negativo | `CHECK (balance >= 0)` mais o lock e a validação no controller ([ADR 0002](../02-arquitetura/decisoes/0002-saldo-em-coluna-com-lock.md)) |
-| `balance = Σ créditos − Σ débitos` | Escrita na mesma transação; conferido por teste |
+| `balance = Σ créditos − Σ débitos` | Saldo e lançamentos gravados na mesma transação; conferido por teste |
 | Pedido não executa duas vezes | `UNIQUE(request_control_key)` ([ADR 0006](../02-arquitetura/decisoes/0006-idempotencia-por-chave.md)) |
 | Nada some (R4) | `transaction` e `account_status_event` só recebem `INSERT`, e nenhum repository tem `update`/`delete` para elas |
 | Id interno não vaza (R5) | O DTO só serializa `*_key` |
-
-## Leitura dos tipos
-
-- `CHAR(36)` guarda o UUID v4 em texto.
-- `CHAR(14)` guarda o CPF com máscara.
-- `TIMESTAMPTZ` guarda instantes absolutos.
