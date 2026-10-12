@@ -1,5 +1,4 @@
-# Dependencias que so o desenvolvedor precisa (rodar teste, ler .env).
-# Nao vao para dentro da imagem que sobe em producao.
+# Só para teste e lint; fora da imagem.
 
 -r requirements.txt
 

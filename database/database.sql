@@ -1,5 +1,4 @@
--- Esquema do banco digital. Roda só quando o volume do banco nasce:
--- depois de mudar este arquivo, `docker compose down -v && docker compose up -d --build`.
+-- Roda só quando o volume do banco nasce: depois de mudar este arquivo, `make reset`.
 -- Desenho e invariantes: docs/04-dados/modelo.md.
 
 CREATE TABLE customer(
