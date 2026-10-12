@@ -43,7 +43,7 @@ A régua das aulas:
 | `200` | Leitura, mudança de estado, ou repetição idempotente |
 | `201` | Recurso criado |
 | `204` | `GET /health_check` |
-| `400` | Corpo ou query fora do schema (`QIT000001`), ou parâmetros contraditórios (`QIT000010`) |
+| `400` | Corpo ou query fora do schema (`QIT000001`) |
 | `403` | `INTERNAL-TOKEN` ausente ou errado (`QIT000002`) |
 | `404` | Key inexistente **ou de outro dono** (R8), e rota inexistente (`QIT000404`) |
 | `405` | Método não aceito na rota (`QIT000405`) |

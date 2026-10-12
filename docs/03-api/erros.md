@@ -27,7 +27,7 @@ O corpo de todo erro é `{title, description, translation, code}`, conforme [con
 |---|---|---|---|
 | `QIT000001` | 400 | `InvalidSchema` | Corpo ou query fora do schema |
 | `QIT000002` | 403 | `ForbiddenNotInternal` | `INTERNAL-TOKEN` ausente ou errado |
-| `QIT000010` | 400 | `InvalidParameter` | Parâmetros de path ou query que se contradizem |
+| `QIT000010` | 400 | `InvalidParameter` | Parâmetro de path ou query com tipo inválido. Reservado: hoje o schema barra antes |
 | `QIT000404` | 404 | `NotFoundResource` | Rota inexistente |
 | `QIT000405` | 405 | `MethodNotAllowed` | Método não aceito |
 | `QIT000500` | 500 | `InternalError` | Exceção não tratada. É registrada com `logger.exception` |

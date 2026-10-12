@@ -35,7 +35,7 @@ Valores monetários são **inteiros em centavos**. Todas as rotas, exceto `/` e 
 |---|---|---|---|---|---|
 | `POST` | `/customer/{customer_key}/account` | Abre uma conta `ACTIVE`, com saldo 0 | key no path | `201 {account_key, status, balance}`; `404 QIT002001` cliente inexistente; `409 QIT002008` limite de contas atingido | Não. Cada POST abre uma conta nova, até o limite |
 | `GET` | `/account/{account_key}` | Devolve conta, saldo, `customer_key` e o histórico de status | key no path | `200`; `404 QIT002007` | — |
-| `PUT` | `/account/{account_key}/status` | Muda o estado da conta | `status` ∈ `ACTIVE`, `BLOCKED`, `CLOSED`; `reason` | `200 {account_key, status}`; `404 QIT002007`; `409 QIT002010` transição inválida (inclui sair de `CLOSED` e pedir o estado atual); `409 QIT002011` encerrar com saldo diferente de 0 | Não. Repetir o mesmo estado devolve 409 |
+| `PUT` | `/account/{account_key}/status` | Muda o estado da conta | `status` ∈ `ACTIVE`, `BLOCKED`, `CLOSED`; `reason` | `200 {account_key, status, balance}`; `404 QIT002007`; `409 QIT002010` transição inválida (inclui sair de `CLOSED` e pedir o estado atual); `409 QIT002011` encerrar com saldo diferente de 0 | Não. Repetir o mesmo estado devolve 409 |
 
 ## Transação
 
