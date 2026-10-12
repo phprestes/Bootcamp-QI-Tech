@@ -1,11 +1,11 @@
 ---
-title: "ADR 0006 — Idempotência por request_control_key"
+title: "ADR 0006: Idempotência por request_control_key"
 summary: Quem chama gera um UUID por operação e o envia no corpo; o banco garante unicidade; repetir devolve a resposta original.
 related: [../../05-fluxos/transferencia.md, ../../06-operacao/resiliencia.md]
 sources: [Dia 4 manhã notas 27-29 e 37, One-page Dia 4, Autoestudo Aula 2 nº 13, Autoestudo Aula 4 nº 6]
 ---
 
-# ADR 0006 — Idempotência por `request_control_key`
+# ADR 0006: Idempotência por `request_control_key`
 
 > [Índice](../../README.md) › [Decisões](README.md) › 0006
 
@@ -17,14 +17,14 @@ Quando o pedido estoura o timeout, quem chamou não sabe se a operação foi exe
 
 ## Decisão
 
-- `POST /account/{account_key}/transaction` exige `request_control_key` (UUID) **no corpo**, validado pelo schema.
+- `POST /account/{account_key}/transaction` exige `request_control_key` (UUID) no corpo, validado pelo schema.
 - A coluna `transaction.request_control_key CHAR(36) UNIQUE` fica preenchida só na linha principal da operação (`DEPOSIT` ou `TRANSFER_OUT`). Nas demais é `NULL`, e o Postgres aceita vários `NULL` num índice `UNIQUE`.
-- No controller, **antes** de travar as contas:
+- No controller, antes de travar as contas:
   1. O repository busca uma transação com essa chave.
-  2. Se ela existe e o corpo bate (mesma conta, tipo, valor e destino), a resposta é **200 com o DTO original**, sem executar nada.
-  3. Se ela existe e o corpo difere, a resposta é **409 `QIT002016`**.
+  2. Se ela existe e o corpo bate (mesma conta, tipo, valor e destino), a resposta é 200 com o DTO original, sem executar nada.
+  3. Se ela existe e o corpo difere, a resposta é 409 `QIT002016`.
 - Corrida entre duas requisições com a mesma chave nova: a segunda falha no `UNIQUE` no commit. O controller captura o `IntegrityError` e repete o passo 1.
-- A divisão de responsabilidades segue a aula: **a busca fica no repository, a decisão no controller, a garantia no banco**.
+- A divisão de responsabilidades segue a aula: a busca fica no repository, a decisão no controller, a garantia no banco.
 
 ## Alternativas descartadas
 

@@ -13,7 +13,7 @@ sources: [Aula 1 tarde ("É construir um banco!"), Aula 2 (modelo de RFC), Aula 
 
 ## O que o sistema oferece
 
-O desafio do bootcamp é **construir um banco** com cinco capacidades:
+O desafio do bootcamp é construir um banco com cinco capacidades:
 
 1. **Cadastro de cliente.** O CPF precisa ser válido, único e regular no birô.
 2. **Conta vinculada a um cliente.** Toda conta tem estado e saldo.
@@ -21,7 +21,7 @@ O desafio do bootcamp é **construir um banco** com cinco capacidades:
 4. **Tarifa na transferência.** É cobrada da conta de origem no mesmo ato.
 5. **Extrato paginado.** É a lista das transações de uma conta.
 
-Quem chama o serviço são **outros sistemas internos**, identificados pelo cabeçalho `INTERNAL-TOKEN`. O sistema não tem interface de usuário.
+Quem chama o serviço são outros sistemas internos, identificados pelo cabeçalho `INTERNAL-TOKEN`. O sistema não tem interface de usuário.
 
 ## As garantias sobre o dinheiro
 

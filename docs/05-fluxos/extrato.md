@@ -1,11 +1,11 @@
 ---
-title: Fluxo — extrato paginado
+title: "Fluxo: extrato paginado"
 summary: GET /account/{account_key}/transactions; paginação limit/page, ordenação, sinal por tipo e reconstrução do saldo.
 related: [../03-api/convencoes.md, ../02-arquitetura/decisoes/0003-transacao-tabela-unica-com-tipo.md]
 sources: [Aula 1 tarde (extrato paginado), Aula 3 tarde p.18, bootcamp-base-api (paginação)]
 ---
 
-# Fluxo — extrato
+# Fluxo: extrato
 
 > [Índice](../README.md) › Fluxos › Extrato
 >
@@ -35,7 +35,7 @@ sources: [Aula 1 tarde (extrato paginado), Aula 3 tarde p.18, bootcamp-base-api 
    }
    ```
 
-   `direction` (`CREDIT`/`DEBIT`) é derivado do tipo no DTO e **não é coluna**.
+   `direction` (`CREDIT`/`DEBIT`) é derivado do tipo no DTO e não é coluna.
 
 ## Caminhos de falha
 

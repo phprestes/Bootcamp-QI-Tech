@@ -13,7 +13,7 @@ sources: [Aula 3 tarde (TDD na QI Tech), Guia Dia 3, Autoestudo Aula 3, bootcamp
 
 ## Black box primeiro
 
-O teste fala com a API **só por HTTP**, como o cliente real, e confere **status e corpo**. **Nenhum arquivo em `tests/` importa nada de `src/`** e nenhum lê o banco (R1). Quando o teste importa `src/`, ele deixou de ser black box.
+O teste fala com a API só por HTTP, como o cliente real, e confere status e corpo. Nenhum arquivo em `tests/` importa nada de `src/` e nenhum lê o banco (R1). Quando o teste importa `src/`, ele deixou de ser black box.
 
 | | Unitário | Black box (padrão) |
 |---|---|---|
@@ -28,7 +28,7 @@ Como R1 proíbe importar `src/`, mesmo a validação de CPF é provada pela API 
 
 1. **Planejar.** Ler a regra na [matriz](../01-contexto/requisitos.md#matriz-regra--teste): o que a rota recebe, devolve e barra.
 2. **Testar.** Escrever o teste antes do código.
-3. **Falhar.** Ver o vermelho **pelo motivo certo**. Um teste que nunca falhou pode não testar nada.
+3. **Falhar.** Ver o vermelho pelo motivo certo. Um teste que nunca falhou pode não testar nada.
 4. **Implementar** o mínimo para ficar verde e refatorar com o verde.
 
 Regras:
@@ -68,9 +68,9 @@ O connector lê `BUREAU_API_URL` do ambiente. No compose, ela aponta para `http:
 1. Ensinar a resposta (*expectation*): `REGULAR`, `SUSPENDED`, `404`, `500`, ou `delay` maior que o timeout.
 2. Chamar a API pela porta da frente.
 3. Conferir status e corpo.
-4. *Verify*: o birô foi chamado? Quantas vezes? Com o `INTERNAL-TOKEN` dele? Nos casos 409 e 422 locais, conferir que **não** foi chamado.
+4. *Verify*: o birô foi chamado? Quantas vezes? Com o `INTERNAL-TOKEN` dele? Nos casos 409 e 422 locais, conferir que não foi chamado.
 
-Regra: **o Mockserver substitui só quem está fora da API.** O banco e as camadas rodam de verdade.
+Regra: o Mockserver substitui só quem está fora da API. O banco e as camadas rodam de verdade.
 
 ## Helpers (`tests/utils/`)
 

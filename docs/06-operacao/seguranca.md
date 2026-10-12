@@ -14,14 +14,14 @@ sources: [Dia 4 manhã notas 18-22, One-page Dia 4, Autoestudo Aula 2 nº 5 (IDO
 ## Autenticação: `INTERNAL-TOKEN`
 
 - É um middleware que confere o header `INTERNAL-TOKEN` contra a variável de ambiente `INTERNAL_TOKEN`.
-- Se o header faltar ou não bater, a resposta é `403 QIT000002` e **o resource nunca roda**.
+- Se o header faltar ou não bater, a resposta é `403 QIT000002` e o resource nunca roda.
 - As rotas abertas são `/` e `/health_check` (`BYPASS_ENDPOINTS`).
-- O middleware **devolve** a resposta de erro em vez de levantar exceção, porque dentro de um middleware ninguém traduz a exceção.
+- O middleware devolve a resposta de erro em vez de levantar exceção, porque dentro de um middleware ninguém traduz a exceção.
 - Em produção, cada serviço tem o próprio token, e só recebe o valor quem precisa chamar. O API Gateway é a única porta pública e autentica quem vem de fora com outra credencial. O `INTERNAL-TOKEN` nunca sai da rede interna.
 
 ## Segredos
 
-- O **repositório é público na entrega**: um token no código passa a ser um token de todo mundo.
+- O repositório é público na entrega: um token no código passa a ser um token de todo mundo.
 - Os valores reais ficam só em variáveis de ambiente (12-factor). O `.env` está no `.gitignore`; o `.env.example` tem só valores de exemplo.
 - O padrão `default_token` serve para desenvolvimento. Em produção, a variável não pode ter padrão.
 
@@ -32,7 +32,7 @@ A autenticação responde "quem é você?". A autorização responde "este recur
 - Toda busca aninhada filtra pelo pai:
   - `GET /account/{a}/transaction/{t}` busca `WHERE transaction_key = :t AND account_id = :a.id`.
   - `GET /customer/{c}/accounts` filtra por `customer_id`.
-- Um recurso que existe mas pertence a outro dono recebe **404, não 403**. O 403 confirmaria que o recurso existe.
+- Um recurso que existe mas pertence a outro dono recebe 404, não 403. O 403 confirmaria que o recurso existe.
 - As keys são UUIDs ([ADR 0005](../02-arquitetura/decisoes/0005-uuid-key-publica.md)), o que impede enumeração.
 
 ## Entrada

@@ -45,7 +45,7 @@ A régua das aulas:
 | `204` | `GET /health_check` |
 | `400` | Corpo ou query fora do schema (`QIT000001`) |
 | `403` | `INTERNAL-TOKEN` ausente ou errado (`QIT000002`) |
-| `404` | Key inexistente **ou de outro dono** (R8), e rota inexistente (`QIT000404`) |
+| `404` | Key inexistente ou de outro dono (R8), e rota inexistente (`QIT000404`) |
 | `405` | Método não aceito na rota (`QIT000405`) |
 | `409` | Conflito de estado: duplicado, transição inválida, conta não ativa, chave de idempotência reutilizada |
 | `422` | O formato está certo, mas o valor não pode existir: CPF com dígito errado, menor de idade, saldo insuficiente, CPF irregular |
@@ -92,5 +92,5 @@ Cada recusa é uma classe em `src/errors/custom_errors.py`. O `error_verificatio
 
 ## Contrato de entrada × saída
 
-- **Entrada:** JSON Schema em `src/schemas/<verbo>_<recurso>.json`, com `additionalProperties: false`. O schema confere **formato**, não verdade: dígito verificador e saldo são assunto do controller.
+- **Entrada:** JSON Schema em `src/schemas/<verbo>_<recurso>.json`, com `additionalProperties: false`. O schema confere formato, não verdade: dígito verificador e saldo são assunto do controller.
 - **Saída:** um DTO por recurso em `src/dtos/`. O DTO escolhe o nome de cada campo e nunca expõe `id`.

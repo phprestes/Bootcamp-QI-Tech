@@ -1,4 +1,4 @@
-# Banco digital — Bootcamp QI Tech 2026
+# Banco digital: Bootcamp QI Tech 2026
 
 > API de banco digital (cliente, conta, depósito, transferência com tarifa, extrato paginado) em Python 3.11 + FastAPI + PostgreSQL 16, empacotada com Docker Compose (api, db, mock do birô). Testes black box por HTTP com pytest e MockServer. Valores monetários são inteiros em centavos; identificadores públicos são UUID (`<entidade>_key`); erros têm corpo `{title, description, translation, code}` com código `QIT…`.
 

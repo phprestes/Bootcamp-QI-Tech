@@ -31,11 +31,11 @@ flowchart LR
 | `db` | build de `database/` (postgres:16 + `database.sql` em initdb) | Fonte da verdade do saldo e do histórico | `pg_isready` |
 | `mock` | `mockserver/mockserver:mockserver-5.11.1` | Finge ser o birô. Sobe vazio, e cada teste ensina a resposta | — |
 
-**Em produção** (fora do escopo, mas é a resposta que a banca espera):
+Em produção (fora do escopo):
 
 - O `mock` dá lugar ao birô real e a API fica atrás de um API Gateway, a única porta pública.
 - Rodam N réplicas da API atrás de um load balancer, que usa o `/health_check`.
-- O auto scaling é guiado por métricas (p95 e taxa de 5xx). Escalar a API **não** escala o banco: cada réplica abre o próprio pool de conexões.
+- O auto scaling é guiado por métricas (p95 e taxa de 5xx). Escalar a API não escala o banco: cada réplica abre o próprio pool de conexões.
 
 ## A API é stateless
 

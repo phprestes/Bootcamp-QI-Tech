@@ -11,7 +11,7 @@ sources: [Modelo de RFC (Aula 2), Aula 2 p.66-73]
 >
 > **Responde a:** por que o sistema é assim? o que foi descartado e quanto custava?
 
-Cada ADR segue o mesmo formato: **Contexto → Decisão → Alternativas descartadas (com preço, e em que cenário ganhariam) → Consequências**. Está escrito no presente, como proposta. A RFC resume estes registros na seção "Explicando a solução de forma macro".
+Cada ADR segue o mesmo formato: Contexto → Decisão → Alternativas descartadas (com preço, e em que cenário ganhariam) → Consequências. Está escrito no presente, como proposta. A RFC resume estes registros na seção "Explicando a solução de forma macro".
 
 | ADR | Decisão | Status |
 |---|---|---|

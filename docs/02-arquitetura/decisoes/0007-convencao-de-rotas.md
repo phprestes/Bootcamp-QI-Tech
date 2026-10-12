@@ -1,11 +1,11 @@
 ---
-title: "ADR 0007 — Convenção de rotas"
+title: "ADR 0007: Convenção de rotas"
 summary: Substantivo em inglês, item no singular e lista no plural (padrão do base-service), sem versão nem prefixo; ação de estado vira sub-recurso.
 related: [../../03-api/convencoes.md, ../../03-api/rotas.md]
 sources: [Aula 2 p.21-22 ("escolham uma e escrevam na RFC"), bootcamp-base-api, biblioteca-api]
 ---
 
-# ADR 0007 — Convenção de rotas
+# ADR 0007: Convenção de rotas
 
 > [Índice](../../README.md) › [Decisões](README.md) › 0007
 

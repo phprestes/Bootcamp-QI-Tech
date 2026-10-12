@@ -1,11 +1,11 @@
 ---
-title: "ADR 0001 — Monólito com Mockserver no papel do birô"
+title: "ADR 0001: Monólito com Mockserver no papel do birô"
 summary: Uma API única para cliente, conta e transação; o birô de CPF é externo e simulado pelo Mockserver.
 related: [../visao-geral.md, ../../06-operacao/resiliencia.md, ../../07-testes/estrategia.md]
 sources: [Aula 3 tarde p.21-25, Aula 3 manhã p.33, Dia 4 manhã nota 22]
 ---
 
-# ADR 0001 — Monólito com Mockserver no papel do birô
+# ADR 0001: Monólito com Mockserver no papel do birô
 
 > [Índice](../../README.md) › [Decisões](README.md) › 0001
 
@@ -17,7 +17,7 @@ A aula mostrou um ecossistema com três serviços: clientes chamam a Receita, co
 
 ## Decisão
 
-Uma API (`api`) com os três recursos e um banco (`db`). O único serviço externo é o **birô de CPF**, consultado por um connector com timeout. No compose e nos testes, quem responde por ele é o `mock` (MockServer).
+Uma API (`api`) com os três recursos e um banco (`db`). O único serviço externo é o birô de CPF, consultado por um connector com timeout. No compose e nos testes, quem responde por ele é o `mock` (MockServer).
 
 ## Alternativas descartadas
 

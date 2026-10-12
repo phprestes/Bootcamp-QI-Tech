@@ -1,11 +1,11 @@
 ---
-title: "ADR 0002 — Saldo em coluna, com lock pessimista e CHECK"
+title: "ADR 0002: Saldo em coluna, com lock pessimista e CHECK"
 summary: account.balance guarda o saldo; toda escrita trava as contas com SELECT … FOR UPDATE em ordem de id; o banco recusa saldo negativo.
 related: [../../05-fluxos/transferencia.md, ../../04-dados/modelo.md, 0003-transacao-tabela-unica-com-tipo.md]
 sources: [Aula 2 tarde p.32-37 (ACID, FOR UPDATE), Autoestudo Aula 2 nº 12 (concorrência), 'Aula 2 p.59 ("onde mora o saldo?")']
 ---
 
-# ADR 0002 — Saldo em coluna, com lock pessimista e CHECK
+# ADR 0002: Saldo em coluna, com lock pessimista e CHECK
 
 > [Índice](../../README.md) › [Decisões](README.md) › 0002
 
@@ -20,10 +20,10 @@ O cenário clássico é o *lost update*: duas transferências leem o mesmo saldo
 - `account.balance BIGINT NOT NULL DEFAULT 0` com `CONSTRAINT balance_non_negative CHECK (balance >= 0)`.
 - Toda operação que muda saldo:
   1. Abre a transação, que já é implícita na sessão da requisição.
-  2. Carrega as contas envolvidas com `with_for_update()`, **sempre em ordem crescente de `id`**. Essa ordem fixa evita deadlock quando A→B e B→A acontecem juntos.
-  3. Valida o estado e o saldo **depois** do lock.
+  2. Carrega as contas envolvidas com `with_for_update()`, sempre em ordem crescente de `id`. Essa ordem fixa evita deadlock quando A→B e B→A acontecem juntos.
+  3. Valida o estado e o saldo depois do lock.
   4. Grava as transações (append-only) e atualiza `balance`.
-  5. Faz **um** `commit` no controller. Se qualquer passo falhar, o middleware faz rollback.
+  5. Faz um `commit` no controller. Se qualquer passo falhar, o middleware faz rollback.
 - O `CHECK` é a segunda rede de proteção. Se um bug passar pela validação, o banco recusa o resultado e a resposta é 500, com log.
 - O extrato reconstrói o saldo: `SUM(créditos) - SUM(débitos) = balance`. Há um teste que confere essa igualdade.
 
@@ -43,5 +43,5 @@ O cenário clássico é o *lost update*: duas transferências leem o mesmo saldo
 
 ## Consequências
 
-- Transferências na mesma conta são serializadas. É aceitável, porque o lock dura milissegundos e **nenhuma chamada HTTP acontece dentro dele**.
+- Transferências na mesma conta são serializadas. É aceitável, porque o lock dura milissegundos e nenhuma chamada HTTP acontece dentro dele.
 - O teste de concorrência dispara N transferências em paralelo e confere que o saldo final é igual à soma do extrato e nunca fica negativo.

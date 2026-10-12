@@ -1,11 +1,11 @@
 ---
-title: Fluxo — depósito
+title: "Fluxo: depósito"
 summary: POST /account/{account_key}/transaction com type DEPOSIT; idempotência, lock da conta, lançamento e saldo.
 related: [transferencia.md, ../02-arquitetura/decisoes/0006-idempotencia-por-chave.md]
 sources: [Aula 2 p.24, Dia 4 notas 28-29]
 ---
 
-# Fluxo — depósito
+# Fluxo: depósito
 
 > [Índice](../README.md) › Fluxos › Depósito
 >

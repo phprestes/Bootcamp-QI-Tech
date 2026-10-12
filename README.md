@@ -35,7 +35,7 @@ Detalhes em [trabalhando com IA](docs/trabalhando-com-ia.md).
 
 ## Documentação
 
-Comece pelo **[índice da documentação](docs/README.md)**. Também existe a versão para LLMs em [`llms.txt`](llms.txt).
+Comece pelo [índice da documentação](docs/README.md). Também existe a versão para LLMs em [`llms.txt`](llms.txt).
 
 | Quero entender… | Leia |
 |---|---|

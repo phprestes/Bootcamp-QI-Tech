@@ -11,7 +11,7 @@ sources: [Modelo de RFC (seção Rotas), RFC da biblioteca (Aula 3), Aula 3 tard
 >
 > **Responde a:** quais rotas existem? o que cada uma recebe, devolve e recusa? qual é idempotente?
 
-Valores monetários são **inteiros em centavos**. Todas as rotas, exceto `/` e `/health_check`, exigem `INTERNAL-TOKEN`; sem ele, a resposta é `403 QIT000002`. Qualquer corpo ou query fora do schema devolve `400 QIT000001`.
+Valores monetários são inteiros em centavos. Todas as rotas, exceto `/` e `/health_check`, exigem `INTERNAL-TOKEN`; sem ele, a resposta é `403 QIT000002`. Qualquer corpo ou query fora do schema devolve `400 QIT000001`.
 
 ## Serviço
 

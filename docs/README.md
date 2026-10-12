@@ -5,7 +5,7 @@ related: [../README.md, ../llms.txt, rfc/RFC.md]
 sources: [Bootcamp QI Tech 2026, Aulas 1 a 4]
 ---
 
-# Documentação — Banco digital (Bootcamp QI Tech 2026)
+# Documentação: Banco digital (Bootcamp QI Tech 2026)
 
 > **Repositório AI-friendly:** agentes de código começam pelo [`AGENTS.md`](../AGENTS.md); o porquê está em [trabalhando com IA](trabalhando-com-ia.md).
 >

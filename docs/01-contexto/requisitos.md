@@ -23,8 +23,8 @@ São parte do enunciado do desafio e cobradas pela banca. A coluna do meio apont
 | R4 | **Nada que entrou deixa de existir** (append-only; soft delete não serve) | Autoestudo 2 | `transaction` e `account_status_event` só recebem INSERT. Ver [modelo](../04-dados/modelo.md). |
 | R5 | Nenhum identificador devolvido é o número que o banco gerou | Autoestudo 2 | `<entidade>_key` UUID. Ver [ADR 0005](../02-arquitetura/decisoes/0005-uuid-key-publica.md). |
 | R6 | Dinheiro não é float | Autoestudo 2 ("FLOAT pra dinheiro") | `BIGINT` em centavos. Ver [ADR 0004](../02-arquitetura/decisoes/0004-dinheiro-em-centavos.md). |
-| R7 | A RFC registra as decisões tomadas **e as descartadas**, com o preço de cada uma | Modelo de RFC; Autoestudo 2 | [ADRs](../02-arquitetura/decisoes/README.md) e [RFC](../rfc/RFC.md). |
-| R8 | Recurso de outro dono responde **404, não 403** (autorização, não só autenticação) | Autoestudo 2 (IDOR) | Toda busca aninhada filtra pelo pai. Ver [segurança](../06-operacao/seguranca.md). |
+| R7 | A RFC registra as decisões tomadas e as descartadas, com o preço de cada uma | Modelo de RFC; Autoestudo 2 | [ADRs](../02-arquitetura/decisoes/README.md) e [RFC](../rfc/RFC.md). |
+| R8 | Recurso de outro dono responde 404, não 403 (autorização, não só autenticação) | Autoestudo 2 (IDOR) | Toda busca aninhada filtra pelo pai. Ver [segurança](../06-operacao/seguranca.md). |
 
 ## Regras de negócio
 
@@ -56,7 +56,7 @@ São parte do enunciado do desafio e cobradas pela banca. A coluna do meio apont
 
 ## Matriz regra → teste
 
-Pela regra do TDD da aula, cada `if` tem **pelo menos dois testes**: o caminho que passa pela regra e o caminho barrado por ela. Os arquivos ficam em `tests/integration/<recurso>/`; a docstring de cada teste cita a regra.
+Pela regra do TDD da aula, cada `if` tem pelo menos dois testes: o caminho que passa pela regra e o caminho barrado por ela. Os arquivos ficam em `tests/integration/<recurso>/`; a docstring de cada teste cita a regra.
 
 | Regra | Teste que passa | Teste barrado | Arquivo |
 |---|---|---|---|

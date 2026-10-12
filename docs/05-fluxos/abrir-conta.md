@@ -1,11 +1,11 @@
 ---
-title: Fluxo — abrir conta
+title: "Fluxo: abrir conta"
 summary: POST /customer/{customer_key}/account passo a passo; cliente existe, limite de contas, nascimento ACTIVE com evento.
 related: [../04-dados/estados.md, criar-cliente.md, ../03-api/rotas.md]
 sources: [Aula 2 tarde p.59-61 (fluxograma de abertura de conta, cinco perguntas)]
 ---
 
-# Fluxo — abrir conta
+# Fluxo: abrir conta
 
 > [Índice](../README.md) › Fluxos › Abrir conta
 >
@@ -35,7 +35,7 @@ flowchart TD
 
 | Condição | Resposta |
 |---|---|
-| `customer_key` inexistente (incluindo uma key válida de um cliente que não existe) | `404 QIT002001`. **Não é 422**, porque a key do path aponta para algo que não existe |
+| `customer_key` inexistente (incluindo uma key válida de um cliente que não existe) | `404 QIT002001`. Não é 422, porque a key do path aponta para algo que não existe |
 | Limite atingido | `409 QIT002008`, sem criar conta |
 | Duas aberturas simultâneas no limite − 1 | A segunda espera o lock, recalcula a contagem e recebe `409` |
 

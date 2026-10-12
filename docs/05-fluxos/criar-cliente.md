@@ -1,11 +1,11 @@
 ---
-title: Fluxo — criar cliente
+title: "Fluxo: criar cliente"
 summary: POST /customer passo a passo, com validação de CPF, idade, duplicidade e consulta ao birô com timeout; caminhos de falha 422/409/502.
 related: [../03-api/rotas.md, ../06-operacao/resiliencia.md, abrir-conta.md]
 sources: [Aula 2 tarde p.49-57 e p.62 (fluxograma com bureau), Aula 3 tarde p.25 (sequência com Mockserver), Dia 4 notas 24-26]
 ---
 
-# Fluxo — criar cliente
+# Fluxo: criar cliente
 
 > [Índice](../README.md) › Fluxos › Criar cliente
 >
@@ -33,15 +33,15 @@ sequenceDiagram
     API-->>C: 201 {customer_key}
 ```
 
-1. O schema confere o formato. O controller valida o **dígito verificador**, que é barato e local.
-2. O controller valida a **idade**, também local.
-3. O controller busca o CPF no banco. A busca vem **antes** do birô, para não gastar uma chamada externa num pedido que será recusado com 409.
-4. O controller chama o birô pelo `BureauConnector`, com timeout. **Nenhum lock é mantido durante a chamada HTTP.**
+1. O schema confere o formato. O controller valida o dígito verificador, que é barato e local.
+2. O controller valida a idade, também local.
+3. O controller busca o CPF no banco. A busca vem antes do birô, para não gastar uma chamada externa num pedido que será recusado com 409.
+4. O controller chama o birô pelo `BureauConnector`, com timeout. Nenhum lock é mantido durante a chamada HTTP.
 5. Com `REGULAR`, o controller faz o `INSERT` e o commit. A resposta é `201`.
 
 ## Caminhos de falha
 
-| Passo | Condição | Resposta | O que **não** acontece |
+| Passo | Condição | Resposta | O que não acontece |
 |---|---|---|---|
 | 1 | Dígito verificador errado | `422 QIT002003` | birô não é chamado |
 | 2 | Menor de 18 | `422 QIT002004` | birô não é chamado |

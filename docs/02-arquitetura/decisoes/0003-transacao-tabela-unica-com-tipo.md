@@ -1,11 +1,11 @@
 ---
-title: "ADR 0003 — Uma tabela transaction, com tipo; tarifa é lançamento próprio"
+title: "ADR 0003: Uma tabela transaction, com tipo; tarifa é lançamento próprio"
 summary: Depósito, transferência e tarifa são linhas da mesma tabela, uma por conta afetada, com type que define o sinal.
 related: [../../04-dados/modelo.md, ../../05-fluxos/transferencia.md, ../../05-fluxos/extrato.md]
 sources: [Aula 2 p.24 (Desenho A × B), Aula 2 p.32 (R$200 + R$2 de tarifa)]
 ---
 
-# ADR 0003 — Uma tabela `transaction`, com tipo; a tarifa é um lançamento próprio
+# ADR 0003: Uma tabela `transaction`, com tipo; a tarifa é um lançamento próprio
 
 > [Índice](../../README.md) › [Decisões](README.md) › 0003
 
@@ -22,7 +22,7 @@ O extrato precisa listar tudo o que mexeu numa conta, em ordem, e reconstruir o 
 
 ## Decisão
 
-- Tabela `transaction` com **uma linha por conta afetada** e `amount BIGINT > 0`. O sinal vem do `transaction_type`:
+- Tabela `transaction` com uma linha por conta afetada e `amount BIGINT > 0`. O sinal vem do `transaction_type`:
 
   | type | Efeito na conta da linha | Quando nasce |
   |---|---|---|
@@ -31,7 +31,7 @@ O extrato precisa listar tudo o que mexeu numa conta, em ordem, e reconstruir o 
   | `TRANSFER_IN` | crédito | transferência, no destino |
   | `FEE` | débito | tarifa da transferência, na origem |
 
-- Uma transferência grava **três linhas** no mesmo commit: `TRANSFER_OUT`, `TRANSFER_IN` e `FEE`.
+- Uma transferência grava três linhas no mesmo commit: `TRANSFER_OUT`, `TRANSFER_IN` e `FEE`.
   - As linhas `TRANSFER_IN` e `FEE` apontam para a `TRANSFER_OUT` por `origin_transaction_id`.
   - `counterpart_account_id` registra a outra ponta.
 - A tarifa é configurável via `TRANSFER_FEE_CENTS` (padrão 200, que é R$ 2,00). O valor efetivamente cobrado fica gravado na própria linha `FEE`, e é por isso que mudar a configuração não reescreve o passado.

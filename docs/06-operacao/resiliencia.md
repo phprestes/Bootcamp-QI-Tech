@@ -13,7 +13,7 @@ sources: [Dia 4 manhã notas 23-35, One-page Dia 4, Autoestudo Aula 4 nº 4-6, A
 
 ## Timeout no connector
 
-- O `requests` **não tem timeout padrão**: sem o parâmetro, a chamada pode esperar para sempre. Uma dependência lenta prende a conexão de banco e represa as requisições, até a API parar de responder sem estar caída.
+- O `requests` não tem timeout padrão: sem o parâmetro, a chamada pode esperar para sempre. Uma dependência lenta prende a conexão de banco e represa as requisições, até a API parar de responder sem estar caída.
 - O `BureauConnector` herda de `RestConnector` e usa `BUREAU_API_TIMEOUT` (padrão 5s), escolhido para este serviço.
 - **O connector traduz e o controller decide.** O `BureauConnector` converte "não respondeu" (timeout, conexão caída) em `BureauUnavailable`. O `CustomerController._check_bureau` decide o que cada resposta significa: 5xx ou corpo sem `situation` também viram `BureauUnavailable`. Em todos os casos sai `502 QIT002006` e nada é gravado.
 - **Nenhuma chamada externa acontece com lock aberto.** O birô é consultado antes de qualquer `FOR UPDATE`.
@@ -33,7 +33,7 @@ Como testar: o Mockserver é configurado com `delay` maior que o timeout, e o te
 - Retry só é seguro quando a operação é idempotente:
   - `POST /customer` falha antes de gravar e tem `UNIQUE(document_number)`.
   - `POST /…/transaction` usa `request_control_key` ([ADR 0006](../02-arquitetura/decisoes/0006-idempotencia-por-chave.md)).
-- Recomendação a quem chama: backoff exponencial com jitter, mantendo a **mesma** `request_control_key`.
+- Recomendação a quem chama: backoff exponencial com jitter, mantendo a mesma `request_control_key`.
 - Circuit breaker: fora do escopo. Seria o próximo passo se o birô caísse com frequência.
 
 ## Escala
@@ -44,4 +44,4 @@ Como testar: o Mockserver é configurado com `delay` maior que o timeout, e o te
 
 ## A regra para levar (Dia 4)
 
-> Antes de dizer que está pronto: **quem pode pedir isso** ([segurança](seguranca.md)), **quanto tempo eu espero** (timeout), **o que acontece se pedirem duas vezes** (idempotência) e **como eu vou saber que falhou** ([observabilidade](observabilidade.md))?
+> Antes de dizer que está pronto: quem pode pedir isso ([segurança](seguranca.md)), quanto tempo eu espero (timeout), o que acontece se pedirem duas vezes (idempotência) e como eu vou saber que falhou ([observabilidade](observabilidade.md))?
