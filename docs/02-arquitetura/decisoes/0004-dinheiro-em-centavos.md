@@ -2,7 +2,7 @@
 title: "ADR 0004 — Dinheiro em BIGINT de centavos"
 summary: Todo valor monetário é inteiro em centavos no banco, na API e nos testes; nunca float (R6).
 related: [../../03-api/convencoes.md, ../../04-dados/modelo.md]
-sources: [Autoestudo Aula 2 #10 (centavos × decimal × float), Aula 2 p.40 (balance BIGINT)]
+sources: [Autoestudo Aula 2 nº 10 (centavos × decimal × float), Aula 2 p.40 (balance BIGINT)]
 ---
 
 # ADR 0004 — Dinheiro em `BIGINT` de centavos

@@ -2,7 +2,7 @@
 title: "ADR 0005 — id interno, key UUID pública"
 summary: Tabelas têm id serial (FKs, ordenação) e <entidade>_key CHAR(36) UNIQUE, a única que sai na API (R5).
 related: [../../03-api/convencoes.md, ../../06-operacao/seguranca.md]
-sources: [Aula 2 p.25-27, One-page Dia 2 (Id e key), Autoestudo Aula 2 #7]
+sources: [Aula 2 p.25-27, One-page Dia 2 (Id e key), Autoestudo Aula 2 nº 7]
 ---
 
 # ADR 0005 — `id` interno, `key` UUID pública

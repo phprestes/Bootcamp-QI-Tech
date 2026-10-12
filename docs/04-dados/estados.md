@@ -2,7 +2,7 @@
 title: Máquina de estados da conta
 summary: Estados ACTIVE, BLOCKED e CLOSED, transições permitidas, o que cada estado permite e como o histórico é gravado.
 related: [modelo.md, ../03-api/rotas.md, ../05-fluxos/abrir-conta.md]
-sources: [Aula 2 tarde p.41-43 ("a lista mora no banco, a transição mora no controller"), Autoestudo Aula 2 #9 e #11]
+sources: [Aula 2 tarde p.41-43 ("a lista mora no banco, a transição mora no controller"), Autoestudo Aula 2 nº 9 e nº 11]
 ---
 
 # Máquina de estados da conta

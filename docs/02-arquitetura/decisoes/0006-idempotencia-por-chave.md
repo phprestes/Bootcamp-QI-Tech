@@ -2,7 +2,7 @@
 title: "ADR 0006 — Idempotência por request_control_key"
 summary: Quem chama gera um UUID por operação e o envia no corpo; o banco garante unicidade; repetir devolve a resposta original.
 related: [../../05-fluxos/transferencia.md, ../../06-operacao/resiliencia.md]
-sources: [Dia 4 manhã notas 27-29 e 37, One-page Dia 4, Autoestudo Aula 2 #13, Autoestudo Aula 4 #6]
+sources: [Dia 4 manhã notas 27-29 e 37, One-page Dia 4, Autoestudo Aula 2 nº 13, Autoestudo Aula 4 nº 6]
 ---
 
 # ADR 0006 — Idempotência por `request_control_key`

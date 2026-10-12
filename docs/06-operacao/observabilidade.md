@@ -2,7 +2,7 @@
 title: Observabilidade
 summary: Logs estruturados com request id, erros nomeados, health check, métricas (p95, taxa de 5xx) e alarmes.
 related: [seguranca.md, resiliencia.md, ../03-api/erros.md]
-sources: [Dia 4 manhã notas 6-17 e 34, One-page Dia 4, Autoestudo Aula 4 #1-3]
+sources: [Dia 4 manhã notas 6-17 e 34, One-page Dia 4, Autoestudo Aula 4 nº 1-3]
 ---
 
 # Observabilidade

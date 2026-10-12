@@ -2,7 +2,7 @@
 title: Resiliência
 summary: Timeout no connector do birô, tradução de falha externa em 502, quando repetir, idempotência e escala horizontal.
 related: [../05-fluxos/criar-cliente.md, ../02-arquitetura/decisoes/0006-idempotencia-por-chave.md, observabilidade.md]
-sources: [Dia 4 manhã notas 23-35, One-page Dia 4, Autoestudo Aula 4 #4-6, Aula 2 p.8-9 (connectors)]
+sources: [Dia 4 manhã notas 23-35, One-page Dia 4, Autoestudo Aula 4 nº 4-6, Aula 2 p.8-9 (connectors)]
 ---
 
 # Resiliência

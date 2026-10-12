@@ -2,7 +2,7 @@
 title: "ADR 0002 — Saldo em coluna, com lock pessimista e CHECK"
 summary: account.balance guarda o saldo; toda escrita trava as contas com SELECT … FOR UPDATE em ordem de id; o banco recusa saldo negativo.
 related: [../../05-fluxos/transferencia.md, ../../04-dados/modelo.md, 0003-transacao-tabela-unica-com-tipo.md]
-sources: [Aula 2 tarde p.32-37 (ACID, FOR UPDATE), Autoestudo Aula 2 #12 (concorrência), Aula 2 p.59 ("onde mora o saldo?")]
+sources: [Aula 2 tarde p.32-37 (ACID, FOR UPDATE), Autoestudo Aula 2 nº 12 (concorrência), 'Aula 2 p.59 ("onde mora o saldo?")']
 ---
 
 # ADR 0002 — Saldo em coluna, com lock pessimista e CHECK

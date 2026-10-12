@@ -2,7 +2,7 @@
 title: Segurança
 summary: INTERNAL-TOKEN, segredos em variável de ambiente, IDOR respondido com 404, validação de entrada e OWASP API Top 10 aplicado.
 related: [observabilidade.md, ../03-api/convencoes.md, ../02-arquitetura/decisoes/0005-uuid-key-publica.md]
-sources: [Dia 4 manhã notas 18-22, One-page Dia 4, Autoestudo Aula 2 #5 (IDOR), Autoestudo Aula 4 #7-9]
+sources: [Dia 4 manhã notas 18-22, One-page Dia 4, Autoestudo Aula 2 nº 5 (IDOR), Autoestudo Aula 4 nº 7-9]
 ---
 
 # Segurança
