@@ -1,14 +1,4 @@
-# ─────────────────────────────────────────────────────────────
-# Bootcamp QI Tech — o que o Git deve ignorar
-#
-# Regra de ouro: NUNCA versione segredo (senha, token, chave) nem
-# dado real. O que é segredo mora em variável de ambiente; o que é
-# exemplo mora no .env.example, com valor de mentirinha.
-# ─────────────────────────────────────────────────────────────
-
 # --- Segredos e configuração local -------------------------
-# O .env guarda as senhas da SUA máquina. Ele nunca sobe.
-# Quem entra no projeto copia o .env.example e preenche.
 .env
 .env.*
 !.env.example
@@ -21,8 +11,6 @@ credentials
 .aws/
 
 # --- Dados -------------------------------------------------
-# Planilha e dump costumam carregar dado real de gente de verdade.
-# Se precisar de dado pra testar, gere fake no próprio teste.
 *.csv
 *.xlsx
 *.xls

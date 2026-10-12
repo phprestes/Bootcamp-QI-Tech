@@ -57,7 +57,8 @@ services:
       - "${MOCK_PORT:-1080}:1080"
 
   pgadmin:
-    image: dpage/pgadmin4:latest
+    # Só para inspecionar o banco no navegador; a API e os testes não dependem dele. Versão fixa.
+    image: dpage/pgadmin4:9.18
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@bootcamp.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-bootcamp}
