@@ -3,9 +3,6 @@ import os
 
 SERVICE_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-# Onde moram os arquivos de schema — os .json que descrevem o formato
-# que cada requisicao precisa ter. Quem le essa pasta e o
-# src/utils/schema_handler.py.
 SCHEMA_PATH = os.path.join(SERVICE_ROOT, "schemas")
 
 APP_ENV = os.environ.get("APP_ENV", "local")
@@ -24,10 +21,7 @@ TRANSFER_FEE_CENTS = int(os.environ.get("TRANSFER_FEE_CENTS", "200"))
 MAX_ACCOUNTS_PER_CUSTOMER = int(os.environ.get("MAX_ACCOUNTS_PER_CUSTOMER", "3"))
 MINIMUM_CUSTOMER_AGE = 18
 
-# Rotas públicas: não exigem o header INTERNAL-TOKEN. São as duas que
-# precisam responder pra quem ainda não tem token nenhum: a raiz, que
-# diz quem é este serviço, e o health check, que o Docker consulta pra
-# saber se a API já está de pé.
+# Públicas: raiz e health check (consultado pelo Docker sem token).
 BYPASS_ENDPOINTS = [
     "/",
     "/health_check",

@@ -10,26 +10,9 @@ logger = get_logger(__name__)
 
 
 def register_request_logger_middleware(application: FastAPI) -> None:
-    """Escreve no log toda requisição que entra e toda resposta que sai.
+    """Loga entrada e saída de cada requisição, com status e tempo.
 
-    Quando algo der errado em produção, é esta linha de log que conta
-    a história: qual rota, qual status, quanto tempo demorou — e, no
-    colchete que o logger acrescenta sozinho, o identificador da
-    requisição, que junta as duas linhas (a de entrada e a de saída) e
-    tudo o que aconteceu entre elas.
-
-    Duas coisas que este middleware NÃO faz, de propósito:
-
-    • **Não escreve o corpo da requisição no log.** É tentador, e é
-      assim que dado sensível vaza: senha, documento, número de cartão
-      — tudo o que o cliente mandou ficaria gravado em texto puro num
-      arquivo que muita gente lê e que ninguém trata como confidencial.
-      Se um dia você precisar logar o corpo, logue campo escolhido a
-      dedo, nunca o objeto inteiro.
-
-    • **Não fala das rotas de BYPASS_ENDPOINTS.** O Docker consulta o
-      /health_check a cada três segundos; sem esta linha, o log seria
-      quase só isso.
+    Nunca loga o corpo (dado sensível) nem as rotas de BYPASS_ENDPOINTS (health check a cada 3 s).
     """
 
     @application.middleware("http")
@@ -37,14 +20,7 @@ def register_request_logger_middleware(application: FastAPI) -> None:
         if request.url.path in BYPASS_ENDPOINTS:
             return await call_next(request)
 
-        # O que veio depois do "?" no endereço entra no log de entrada:
-        # é metade do pedido, e sem ele a linha "GET /customers"
-        # não diz qual página alguém pediu.
-        #
-        # E fica a lição pelo avesso: se a query string vai parar no
-        # log, ela NÃO é lugar para segredo. Um token na URL acaba
-        # gravado aqui, no histórico do navegador e no log de todo proxy
-        # do caminho. Segredo viaja em cabeçalho, como o INTERNAL-TOKEN.
+        # A query string vai para o log, por isso segredo nunca viaja nela.
         requested_path = request.url.path
         if request.url.query:
             requested_path = f"{requested_path}?{request.url.query}"
