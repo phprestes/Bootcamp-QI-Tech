@@ -24,16 +24,16 @@ pandoc /tmp/rfc-rendered.md -o RFC.pdf --pdf-engine=wkhtmltopdf
 
 Sem ferramentas: abra `RFC.md` no GitHub, que renderiza Mermaid, e use Imprimir → Salvar como PDF.
 
-O PDF não é versionado. Ele é anexado na entrega.
+O PDF entregue fica versionado em [RFC.pdf](RFC.pdf). Gere de novo sempre que `RFC.md` mudar.
 
 ## Checklist do modelo
 
 - [ ] Time, data e versão preenchidos. O bloco "Como usar este modelo" foi removido.
-- [ ] O corpo (Contextualização e Implementação) segue as seções do modelo. O detalhe que passa do alvo de 2 a 4 páginas fica nos anexos, para a RFC se explicar sem o repositório.
+- [ ] Só as seções do modelo (Contextualização e Implementação), sem acrescentar nem renomear, em no máximo 4 páginas. O detalhe fica nos documentos do repositório.
 - [ ] "Entendendo o problema" não fala de rota, tabela nem biblioteca.
 - [ ] "Solução macro": um parágrafo mais 2 a 4 alternativas descartadas, cada uma com o preço e o cenário em que ganharia (R7).
 - [ ] Rotas com status explícitos (400, 404, 409, 422, 502) e a idempotência dita.
-- [ ] Banco de dados só com diagrama; invariantes e índices vão no Anexo E.
+- [ ] Banco de dados só com diagrama; invariantes e índices ficam em [modelo.md](../04-dados/modelo.md).
 - [ ] Cada operação principal tem caminho feliz e pelo menos uma falha, dizendo o que é travado e o que é desfeito.
 - [ ] Um único bloco "Principal desafio", na seção onde o desafio mora.
 - [ ] O texto está no presente da proposta, não no passado ("foi decidido").
