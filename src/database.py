@@ -18,10 +18,9 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False)
 
 
 class Context:
-    """Estado de uma requisição. Hoje só a sessão, criada sob demanda.
+    """Estado de uma requisição; hoje só a sessão, criada sob demanda.
 
-    Objeto mutável porque o ContextVar é copiado para a task da rota: um .set() na
-    rota não chega ao middleware, mas a mutação deste objeto chega.
+    Mutável porque o ContextVar é copiado para a task da rota: só a mutação chega ao middleware.
     """
 
     def __init__(self) -> None:

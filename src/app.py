@@ -21,10 +21,8 @@ def create_app() -> FastAPI:
         openapi_url=None,
     )
 
-    # O último registrado executa primeiro. Ordem de execução:
-    # request_context -> request_logger -> internal_token -> session_manager -> rota.
-    # Log antes do token para registrar os 403; sessão por último para não abrir para quem foi barrado.
-    # Nenhum teste cobre esta ordem (docs/02-arquitetura/camadas.md).
+    # O último registrado executa primeiro: request_context -> request_logger -> internal_token -> session_manager.
+    # Por que esta ordem, que nenhum teste cobre: docs/02-arquitetura/camadas.md.
     register_session_manager_middleware(application)
     register_internal_token_middleware(application)
     register_request_logger_middleware(application)

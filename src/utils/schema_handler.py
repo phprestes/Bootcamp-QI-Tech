@@ -35,11 +35,7 @@ class SchemaCache:
 
 
 class SchemaHandler:
-    """Valida corpo e query string contra os JSON Schema de src/schemas/.
-
-    JSON Schema em vez de Pydantic: é o contrato usado nos serviços da QI Tech e
-    pode ser lido por quem integra sem abrir o código.
-    """
+    """Valida corpo e query string contra src/schemas/. Por que JSON Schema: docs/02-arquitetura/decisoes/0009-contrato-em-json-schema.md."""
 
     @staticmethod
     def validate(schema_file_name: str):
