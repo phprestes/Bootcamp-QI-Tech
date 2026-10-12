@@ -29,6 +29,7 @@ sources: [Autoestudo Aula 2 nº 10 (centavos × decimal × float), Aula 2 p.40 (
   - **Ganharia se** fosse preciso guardar frações de centavo, como juros diários ou câmbio.
 - **`FLOAT`/`REAL`.**
   - **Preço:** erro de arredondamento. Descartado sem discussão (R6).
+  - **Ganharia se** o número fosse só estatística, como o ticket médio num relatório, sem virar saldo.
 - **String `"200.00"` na API.**
   - **Preço:** o cliente precisa fazer parse, e a validação passa a depender de regex.
   - **Ganharia se** a API fosse pública e consumida por front-ends que exibem o valor direto.

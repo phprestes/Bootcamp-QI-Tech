@@ -36,8 +36,10 @@ Quando o pedido estoura o timeout, quem chamou não sabe se a operação foi exe
   - **Ganharia se** várias rotas de tipos diferentes precisassem de idempotência.
 - **Deduplicar por (conta, valor, janela de tempo).**
   - **Preço:** duas transferências legítimas e iguais seguidas seriam bloqueadas.
+  - **Ganharia se** quem chama não pudesse mandar uma chave, como um sistema legado que não muda o contrato.
 - **Não fazer nada.**
   - **Preço:** um retry depois de timeout debita em dobro.
+  - **Ganharia se** só houvesse operações naturalmente idempotentes, como leituras e `PUT` de estado.
 
 ## Consequências
 

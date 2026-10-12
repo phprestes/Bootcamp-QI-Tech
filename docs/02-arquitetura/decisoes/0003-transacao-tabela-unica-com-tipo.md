@@ -46,6 +46,7 @@ O extrato precisa listar tudo o que mexeu numa conta, em ordem, e reconstruir o 
   - **Ganharia se** o relatório principal fosse "transferências do sistema", e não "extrato da conta".
 - **Tarifa como coluna `fee` na linha da transferência.**
   - **Preço:** o extrato não mostra a tarifa como lançamento e a soma das linhas não reconstrói o saldo sem regra especial.
+  - **Ganharia se** a tarifa nunca aparecesse para o cliente e o extrato não precisasse fechar com o saldo.
 
 ## Consequências
 

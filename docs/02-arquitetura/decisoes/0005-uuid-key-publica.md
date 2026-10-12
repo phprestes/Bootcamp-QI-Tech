@@ -28,6 +28,7 @@ Com `/account/2` na URL, qualquer um percorre a base contando de 1 em diante, e 
   - **Ganharia se** os ids fossem gerados em vários serviços sem coordenação.
 - **id sequencial exposto + checagem de dono.**
   - **Preço:** resolve a autorização, mas não o vazamento de volume nem a enumeração.
+  - **Ganharia se** o volume não fosse segredo e o identificador precisasse ser curto e legível, como um número de protocolo.
 
 ## Consequências
 

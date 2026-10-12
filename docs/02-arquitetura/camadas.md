@@ -92,5 +92,5 @@ O contexto guarda um objeto mutável, não a sessão direto: o `ContextVar` é c
 
 `schemas/` cuida do que entra; `dtos/` do que sai.
 
-- O decorator `@SchemaHandler.validate("post_customer.json")` valida o corpo com `jsonschema` antes da rota rodar. JSON Schema em vez de Pydantic porque é o contrato dos serviços da QI Tech e quem integra lê sem abrir o código. O custo: o corpo chega como `dict`.
+- O decorator `@SchemaHandler.validate("post_customer.json")` valida o corpo com `jsonschema` antes da rota rodar. JSON Schema em vez de Pydantic: [ADR 0009](decisoes/0009-contrato-em-json-schema.md).
 - O DTO transforma o model na resposta: status vira texto, `customer_id` vira `customer_key` (R5). Nada confere o DTO depois; campo interno que entrar ali sai para o cliente.

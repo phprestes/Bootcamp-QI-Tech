@@ -23,5 +23,6 @@ Cada ADR segue o mesmo formato: Contexto → Decisão → Alternativas descartad
 | [0006](0006-idempotencia-por-chave.md) | `request_control_key` no corpo + `UNIQUE` | Aceita |
 | [0007](0007-convencao-de-rotas.md) | Item no singular, lista no plural, sem versão na URL | Aceita |
 | [0008](0008-repositorio-ai-friendly.md) | `AGENTS.md` como fonte única para agentes de IA, com skills em `.agents/` | Aceita |
+| [0009](0009-contrato-em-json-schema.md) | Contrato de entrada em JSON Schema fechado, não Pydantic | Aceita |
 
 Para incluir uma decisão nova, copie um ADR, use o próximo número e adicione a linha nesta tabela e no [`llms.txt`](../../../llms.txt).

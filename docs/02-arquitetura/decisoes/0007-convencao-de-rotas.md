@@ -33,6 +33,7 @@ A aula pediu que cada time escolhesse uma convenção de singular e plural e a r
   - **Ganharia se** o projeto começasse do zero ou seguisse um guia externo, como Google AIP ou Microsoft.
 - **Rotas por ação (`/deposit`, `/transfer`).**
   - **Preço:** o verbo vai para a URL, o que viola o REST da aula. Ver [ADR 0003](0003-transacao-tabela-unica-com-tipo.md).
+  - **Ganharia se** depósito e transferência fossem tabelas separadas, com corpos muito diferentes.
 - **Versionar com `/v1`.**
   - **Preço:** nenhum cliente externo justifica isso agora.
   - **Ganharia se** a API fosse pública, com integrações de terceiros.

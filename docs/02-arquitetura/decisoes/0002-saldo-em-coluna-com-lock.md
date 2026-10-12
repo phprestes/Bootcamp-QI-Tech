@@ -40,6 +40,7 @@ O cenário clássico é o *lost update*: duas transferências leem o mesmo saldo
   - **Ganharia se** a operação fosse um débito simples numa conta só.
 - **Não fazer nada (ler, calcular e gravar sem lock).**
   - **Preço:** saldo negativo ou divergente sob carga. O `CHECK` barraria o negativo com um 500, mas não o lost update entre saldos positivos.
+  - **Ganharia se** cada conta tivesse um único escritor, por exemplo uma fila que serializa as operações dela.
 
 ## Consequências
 
